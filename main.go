@@ -30,8 +30,7 @@ func main()  {
 		RootCAs:       certPool,
 	})
 
-
-	conn, err := grpc.Dial(":8080", grpc.WithTransportCredentials(creds))
+	conn, err := grpc.Dial(":8081", grpc.WithTransportCredentials(creds))
 	if err != nil {
 		log.Fatal(err)
 	}

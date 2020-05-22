@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66f65dcd-c9a6-4a18-831f-00912e006d14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cert/ca.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cert/client.key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cert/client.pem" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
