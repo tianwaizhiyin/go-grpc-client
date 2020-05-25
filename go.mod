@@ -5,6 +5,7 @@ go 1.13
 replace goTest => D:\golang\gopath\src\go-grpc-client
 
 require (
+	github.com/envoyproxy/protoc-gen-validate v0.1.0
 	github.com/golang/protobuf v1.4.2
 	golang.org/x/net v0.0.0-20200520182314-0ba52f642ac2 // indirect
 	golang.org/x/sys v0.0.0-20200519105757-fe76b779f299 // indirect
