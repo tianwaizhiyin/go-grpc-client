@@ -5,11 +5,13 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
-	"github.com/tianwaizhiyin/go-grpc-client.git/services"
+	"github.com/golang/protobuf/ptypes/timestamp"
+	. "github.com/tianwaizhiyin/go-grpc-client.git/services"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"io/ioutil"
 	"log"
+	"time"
 )
 
 func main()  {
@@ -36,10 +38,41 @@ func main()  {
 	}
 	defer conn.Close()
 
-	prodClient := services.NewProdServiceClient(conn)
-	prodRes, err := prodClient.GetProdStock(context.Background(), &services.ProdRequest{ProdId:12})
+	prodClient := NewProdServiceClient(conn)
+	ctx := context.Background()
+	t:=timestamp.Timestamp{Seconds:time.Now().Unix()}
+	orderClient := NewOrderServiceClient(conn)
+	res, _ := orderClient.NewOrder(ctx, &OrderMain{
+		OrderId:1001,
+		OrderNo:"20190809",
+		OrderMoney:90,
+		OrderTime:&t,
+	})
+	fmt.Println(res)
+	//获取单个商品
+	//prodRes, err := prodClient.GetProdStock(ctx,
+	//	&ProdRequest{ProdId:12, ProdArea:ProdAreas_C}) //获取商品库存
+
+	//获取商品模型
+	prod, err := prodClient.GetProdSInfo(ctx,&ProdRequest{ProdId:12})
+
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(prodRes.ProdStock)
+	fmt.Println(prod.ProdName)
+	//fmt.Println(prodRes.ProdStock)
+
+	//获取多个商品库存
+	response, err := prodClient.GetProdStocks(ctx,
+		&QuerySize{Size:10})
+	if err != nil {
+		log.Fatal(err)
+	}
+	//获取所有
+	fmt.Println(response.Prodres)
+	//获取单个
+	fmt.Println(response.Prodres[2].ProdStock)
+
+
+
 }
